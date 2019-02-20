@@ -28,6 +28,7 @@ pipeline {
         stage('Integration Test') {
             steps {
                 sh 'mvn verify -DskipUnitTests'
+                junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
             }
         }
 
@@ -37,13 +38,6 @@ pipeline {
         //     }
         // }
 
-        post {
-            always {
-                // Archive Unit and integration test results
-                junit allowEmptyResults: true,
-                        testResults: '**/target/surefire-reports/TEST-*.xml, **/target/failsafe-reports/*.xml'
-                mailIfStatusChanged env.EMAIL_RECIPIENTS
-            }
-        }
+        
     }
 }
