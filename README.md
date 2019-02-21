@@ -5,7 +5,7 @@ Example
 
 ## Instructions
 
-`mvn clean package`
+`./mvnw clean package`
 
 `docker build -t java_restful_example .`
 
@@ -21,4 +21,4 @@ example output:
 
 ### Run locally
 
-`mvn spring-boot:run`
+`./mvnw spring-boot:run`
