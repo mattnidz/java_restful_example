@@ -5,21 +5,21 @@ pipeline {
         stage('Build') {
             steps {
                 //echo 'Building ...'
-                bat ".\\mvnw.cmd package"
+                bat "mvnw.cmd package"
             }
         }
         
         stage('Unit Test') {
             steps {
                 //echo 'Unit Testing ...'
-                bat '.\\mvnw.cmd test'
+                bat 'mvnw.cmd test'
                 //junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
             }
         }
 
         stage('Integration Test') {
             steps {
-                bat '.\\mvnw.cmd verify -DskipUnitTests'
+                bat 'mvnw.cmd verify -DskipUnitTests'
             }
         }
 
