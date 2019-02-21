@@ -1,30 +1,25 @@
 pipeline {
     agent any
 
-    options {
-        disableConcurrentBuilds()
-        buildDiscarder(logRotator(numToKeepStr: '10'))
-    }
-
     stages {
         stage('Build') {
             steps {
-                echo 'Building ...'
-                sh './mvnw -B package'
+                //echo 'Building ...'
+                bat ".\\mvnw package"
             }
         }
         
         stage('Unit Test') {
             steps {
-                echo 'Unit Testing ...'
-                sh './mvnw test'
-                junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
+                //echo 'Unit Testing ...'
+                bat '.\\mvnw.cmd test'
+                //junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
             }
         }
 
         stage('Integration Test') {
             steps {
-                sh './mvnw verify -DskipUnitTests'
+                bat '.\\mvnw verify -DskipUnitTests'
             }
         }
 
