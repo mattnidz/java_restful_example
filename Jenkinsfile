@@ -6,29 +6,25 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10'))
     }
 
-    tools {
-        maven 'M3'
-    }
-
     stages {
         stage('Build') {
             steps {
                 echo 'Building ...'
-                sh 'mvn -B package'
+                sh './mvnw -B package'
             }
         }
         
         stage('Unit Test') {
             steps {
                 echo 'Unit Testing ...'
-                sh 'mvn test'
+                sh './mvnw test'
+                junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
             }
         }
 
         stage('Integration Test') {
             steps {
-                sh 'mvn verify -DskipUnitTests'
-                junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
+                sh './mvnw verify -DskipUnitTests'
             }
         }
 
