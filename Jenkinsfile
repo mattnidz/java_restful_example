@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 //echo 'Building ...'
-                bat ".\\mvnw package"
+                bat ".\\mvnw.cmd package"
             }
         }
         
@@ -19,7 +19,7 @@ pipeline {
 
         stage('Integration Test') {
             steps {
-                bat '.\\mvnw verify -DskipUnitTests'
+                bat '.\\mvnw.cmd verify -DskipUnitTests'
             }
         }
 
