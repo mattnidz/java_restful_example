@@ -4,22 +4,26 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                //echo 'Building ...'
-                bat "mvnw.cmd package"
+                echo 'Building ...'
+                //bat "mvn package"
+                sh "mvn package"
             }
         }
         
         stage('Unit Test') {
             steps {
-                //echo 'Unit Testing ...'
-                bat 'mvnw.cmd test'
+                echo 'Unit Testing ...'
+                //bat 'mvn test'
+                sh 'mvn test'
                 //junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
             }
         }
 
         stage('Integration Test') {
             steps {
-                bat 'mvnw.cmd verify -DskipUnitTests'
+                echo 'Integration Testing ...'
+                //bat 'mvn verify -DskipUnitTests'
+                sh 'mvn verify -DskipUnitTests'
             }
         }
 
